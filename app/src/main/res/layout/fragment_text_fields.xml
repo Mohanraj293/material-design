@@ -27,7 +27,31 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="datetime"
             />
     </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/pick_date_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Date"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="260dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        />
+
+    <Button
+        android:id="@+id/pick_time_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Time"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="300dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        />
+
+
+
+
 
 </FrameLayout>
