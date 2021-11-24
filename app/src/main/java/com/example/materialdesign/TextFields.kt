@@ -1,12 +1,12 @@
 package com.example.materialdesign
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -40,6 +40,13 @@ class TextFields : Fragment() {
         val context = context as MainActivity
         val date = context.findViewById<Button>(R.id.pick_date_button)
         val time = context.findViewById<Button>(R.id.pick_time_button)
+        val tab = context.findViewById<Button>(R.id.tabBtn)
+
+       tab.setOnClickListener {
+           val intent = Intent(view.context, TabLayout::class.java)
+           startActivity(intent)
+       }
+
         val builder =     MaterialDatePicker.Builder.datePicker()
             .setTitleText("Select date")
             .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
@@ -49,7 +56,7 @@ class TextFields : Fragment() {
                 .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setHour(12)
                 .setMinute(10)
-                .setTitleText("Select Appointment time")
+                .setTitleText("Select time")
                 .build()
 
         date.setOnClickListener{

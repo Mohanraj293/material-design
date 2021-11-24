@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialDesign">
         <activity
+            android:name=".TabLayout"
+            android:exported="false" />
+        <activity
             android:name=".List_View"
             android:exported="false" />
         <activity

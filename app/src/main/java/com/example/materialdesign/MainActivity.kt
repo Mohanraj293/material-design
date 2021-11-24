@@ -1,11 +1,9 @@
 package com.example.materialdesign
 
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -41,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.topAppBar)
 
         setSupportActionBar(toolbar)
+
 
         drawerLayout = findViewById(R.id.drawerLayout)
 
