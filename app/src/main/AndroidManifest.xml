@@ -10,8 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialDesign">
         <activity
-            android:name=".TabLayout"
+            android:name=".MyListAdapter"
             android:exported="false" />
+        <activity
+            android:name=".DbActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TabLayout"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".List_View"
             android:exported="false" />

@@ -40,7 +40,13 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Main Activity"
+            app:layout_anchor="@+id/frameLayout"
+            app:layout_anchorGravity="center" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -53,6 +59,5 @@
         android:id="@+id/navView"
         app:headerLayout="@layout/header_navigation_drawer"
         app:menu="@menu/navigation_drawer"/>
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

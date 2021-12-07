@@ -28,7 +28,7 @@
                 app:navigationIcon="@drawable/ic_left_arrow"
                 app:title="Tab Layout" />
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_tablayout"
+                android:id="@+id/tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabIndicatorColor="#FFF"

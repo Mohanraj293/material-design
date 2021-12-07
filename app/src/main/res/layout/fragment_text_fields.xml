@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,37 +31,48 @@
             android:inputType="datetime"
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <Button
-        android:id="@+id/pick_date_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Date"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="260dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        />
 
-    <Button
-        android:id="@+id/pick_time_button"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Time"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="300dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        />
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/pick_date_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Date" />
+
+        <Button
+            android:id="@+id/pick_time_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Time" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50sp"
+        android:orientation="horizontal">
     <Button
         android:id="@+id/tabBtn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tab Layout"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="340dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        />
-
-
-
+        tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/dbBtn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DB Layout"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
 
 
 </FrameLayout>

@@ -41,29 +41,33 @@ class TextFields : Fragment() {
         val date = context.findViewById<Button>(R.id.pick_date_button)
         val time = context.findViewById<Button>(R.id.pick_time_button)
         val tab = context.findViewById<Button>(R.id.tabBtn)
+        val dbLayout = context.findViewById<Button>(R.id.dbBtn)
 
        tab.setOnClickListener {
            val intent = Intent(view.context, TabLayout::class.java)
            startActivity(intent)
        }
-
-        val builder =     MaterialDatePicker.Builder.datePicker()
-            .setTitleText("Select date")
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-            .build()
-        val picker =
-            MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H)
-                .setHour(12)
-                .setMinute(10)
-                .setTitleText("Select time")
-                .build()
+        dbLayout.setOnClickListener {
+            val intent = Intent(view.context, DbActivity::class.java)
+            startActivity(intent)
+        }
 
         date.setOnClickListener{
-            fragmentManager?.let { it1 -> builder.show(it1,"d") }
+            val builder =     MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+            builder.show(parentFragmentManager,"")
         }
         time.setOnClickListener{
-            fragmentManager?.let { it1 -> picker.show(it1,"d") }
+            val picker =
+                MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .setHour(12)
+                    .setMinute(10)
+                    .setTitleText("Select time")
+                    .build()
+            picker.show(parentFragmentManager,"")
         }
 
     }

@@ -2,7 +2,6 @@ package com.example.materialdesign
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.Nullable
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -15,10 +14,11 @@ class TabLayout : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_layout)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         val tab_viewpager: ViewPager = findViewById(R.id.tab_viewpager)
-        val tab_tablayout: TabLayout = findViewById(R.id.tab_tablayout)
+        val tab_tablayout: TabLayout = findViewById(R.id.tablayout)
 
         setSupportActionBar(toolbar)
         setupViewPager(tab_viewpager)
