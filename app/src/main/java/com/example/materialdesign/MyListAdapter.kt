@@ -1,14 +1,13 @@
 package com.example.materialdesign
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-class MyListAdapter (private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val email: Array<String>)
+class MyListAdapter
+    (private val context: Activity, private val id: Array<String>, private val name: Array<String>, private val email: Array<String>)
     : ArrayAdapter<String>(context, R.layout.list_adapter, name)  {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {

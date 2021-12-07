@@ -1,5 +1,6 @@
 package com.example.materialdesign
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -38,6 +39,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME
         db.close()
         return success
     }
+    @SuppressLint("Range")
     fun viewEmployee():List<UserModel>{
         val empList:ArrayList<UserModel> = ArrayList<UserModel>()
         val selectQuery = "SELECT  * FROM $TABLE_CONTACTS"

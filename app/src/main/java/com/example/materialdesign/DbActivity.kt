@@ -16,7 +16,6 @@ class DbActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_db)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         val toolbar: Toolbar = findViewById(R.id.topAppBar)
         setSupportActionBar(toolbar)
     }
@@ -32,20 +31,18 @@ class DbActivity : AppCompatActivity() {
         if(id.trim()!="" && name.trim()!="" && email.trim()!=""){
             val status = databaseHandler.addEmployee(UserModel(Integer.parseInt(id),name, email))
             if(status > -1){
-                Toast.makeText(applicationContext,"record save",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,"Record saved",Toast.LENGTH_LONG).show()
                 u_id.text.clear()
                 u_name.text.clear()
                 u_email.text.clear()
             }
         }else{
-            Toast.makeText(applicationContext,"id or name or email cannot be blank",Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext,"ID or name or email cannot be blank",Toast.LENGTH_LONG).show()
         }
     }
     fun viewRecord(view: View){
         val listView = findViewById<ListView>(R.id.listView)
-        //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler= DatabaseHandler(this)
-        //calling the viewEmployee method of DatabaseHandler class to read the records
         val emp: List<UserModel> = databaseHandler.viewEmployee()
         val empArrayId = Array<String>(emp.size){"0"}
         val empArrayName = Array<String>(emp.size){"null"}
@@ -57,11 +54,9 @@ class DbActivity : AppCompatActivity() {
             empArrayEmail[index] = e.userEmail
             index++
         }
-        //creating custom ArrayAdapter
         val myListAdapter = MyListAdapter(this,empArrayId,empArrayName,empArrayEmail)
         listView.adapter = myListAdapter
     }
-    //method for updating records based on user id
     fun updateRecord(view: View){
         val dialogBuilder = AlertDialog.Builder(this)
         val inflater = this.layoutInflater
@@ -79,28 +74,22 @@ class DbActivity : AppCompatActivity() {
             val updateId = edtId.text.toString()
             val updateName = edtName.text.toString()
             val updateEmail = edtEmail.text.toString()
-            //creating the instance of DatabaseHandler class
             val databaseHandler: DatabaseHandler= DatabaseHandler(this)
             if(updateId.trim()!=""){
-                //calling the updateEmployee method of DatabaseHandler class to update record
                 val status = databaseHandler.updateEmployee(UserModel(Integer.parseInt(updateId),updateName, updateEmail))
                 if(status > -1){
-                    Toast.makeText(applicationContext,"record update",Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,"Record updated",Toast.LENGTH_LONG).show()
                 }
             }else{
-                Toast.makeText(applicationContext,"id cannot be blank",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,"ID cannot be blank",Toast.LENGTH_LONG).show()
             }
 
         })
-        dialogBuilder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
-            //pass
-        })
+        dialogBuilder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->  })
         val b = dialogBuilder.create()
         b.show()
     }
-    //method for deleting records based on id
     fun deleteRecord(view: View){
-        //creating AlertDialog for taking user id
         val dialogBuilder = AlertDialog.Builder(this)
         val inflater = this.layoutInflater
         val dialogView = inflater.inflate(R.layout.delete_dialog, null)
@@ -112,22 +101,17 @@ class DbActivity : AppCompatActivity() {
         dialogBuilder.setPositiveButton("Delete", DialogInterface.OnClickListener { _, _ ->
 
             val deleteId = dltId.text.toString()
-            //creating the instance of DatabaseHandler class
             val databaseHandler: DatabaseHandler= DatabaseHandler(this)
             if(deleteId.trim()!=""){
-                //calling the deleteEmployee method of DatabaseHandler class to delete record
                 val status = databaseHandler.deleteEmployee(UserModel(Integer.parseInt(deleteId),"",""))
                 if(status > -1){
-                    Toast.makeText(applicationContext,"record deleted",Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,"Record deleted",Toast.LENGTH_LONG).show()
                 }
             }else{
-                Toast.makeText(applicationContext,"id or name or email cannot be blank",Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,"ID cannot be blank",Toast.LENGTH_LONG).show()
             }
-
         })
-        dialogBuilder.setNegativeButton("Cancel", DialogInterface.OnClickListener { _, _ ->
-            //pass
-        })
+        dialogBuilder.setNegativeButton("Cancel", DialogInterface.OnClickListener { _, _ ->})
         val b = dialogBuilder.create()
         b.show()
     }
