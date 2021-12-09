@@ -43,6 +43,7 @@ class TextFields : Fragment() {
         val tab = context.findViewById<Button>(R.id.tabBtn)
         val dbLayout = context.findViewById<Button>(R.id.dbBtn)
         val retroBtn = context.findViewById<Button>(R.id.retroBtn)
+
        tab.setOnClickListener {
            val intent = Intent(view.context, TabLayout::class.java)
            startActivity(intent)

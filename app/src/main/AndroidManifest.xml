@@ -13,9 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialDesign">
         <activity
+            android:name=".RetrofitCreateUser"
+            android:exported="false" />
+        <activity
             android:name=".RetrofitGet"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MyListAdapter"
             android:exported="false"

@@ -1,57 +1,78 @@
 package com.example.materialdesign
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
+import android.text.TextUtils
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.StringBuilder
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_retrofit_create_user.*
+import kotlinx.android.synthetic.main.activity_retrofit_get.*
 
 
-class RetrofitGet : AppCompatActivity() {
-    val BASE_URL = "https://jsonplaceholder.typicode.com/"
-    private lateinit var textViewResult:TextView
+class RetrofitGet : AppCompatActivity(), RecyclerViewAdapter.OnItemClickListener {
+    lateinit var recyclerViewAdapter: RecyclerViewAdapter
+    lateinit var viewModel: RetrofitViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_retrofit_get)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val toolbar: Toolbar = findViewById(R.id.AppBar)
         setSupportActionBar(toolbar)
-        getPost()
+        initRecyclerView()
+        initViewModel()
+        searchUser()
+        createUserButton.setOnClickListener{
+            startActivity(Intent(this@RetrofitGet,RetrofitCreateUser::class.java))
+        }
     }
-    private  fun getPost(){
-        val retrofitbuilder = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build().create(ApiInterface::class.java)
-        val retrofitdata = retrofitbuilder.getPosts()
 
-        retrofitdata.enqueue(object : Callback<List<PostdataItem>?> {
-            override fun onResponse(call: Call<List<PostdataItem>?>,response: Response<List<PostdataItem>?>) {
-                val resp = response.body()!!
-
-                val myBuilder = StringBuilder()
-                for (myData in resp){
-                    myBuilder.append("ID: "+myData.id)
-                    myBuilder.append("\n")
-                    myBuilder.append("Title: "+myData.title)
-                    myBuilder.append("\n")
-                    myBuilder.append("Body: "+myData.body)
-                    myBuilder.append("\n")
-                    myBuilder.append("\n")
-                }
-                val text = findViewById<TextView>(R.id.text_view_result)
-                text.text = myBuilder
-
+    private fun initRecyclerView(){
+        recylerView.apply {
+            layoutManager = LinearLayoutManager(this@RetrofitGet)
+            val decoration = DividerItemDecoration(this@RetrofitGet,DividerItemDecoration.VERTICAL)
+            addItemDecoration(decoration)
+            recyclerViewAdapter = RecyclerViewAdapter(this@RetrofitGet)
+            adapter = recyclerViewAdapter
+        }
+    }
+    private fun searchUser(){
+        search_button.setOnClickListener{
+            if(!TextUtils.isEmpty(searchEditText.text.toString())){
+                viewModel.searchUser(searchEditText.text.toString())
+            }else{
+                viewModel.getUserList()
             }
-            override fun onFailure(call: Call<List<PostdataItem>?>, t: Throwable) {
-                Log.d("Retro Activity","OnFailure"+t.message)
+        }
+    }
+    fun initViewModel(){
+        viewModel=ViewModelProvider(this).get(RetrofitViewModel::class.java)
+        viewModel.getUserListObservalble().observe(this, Observer<UserList> {
+            if (it == null){
+                Toast.makeText(this@RetrofitGet,"No results Found",Toast.LENGTH_SHORT)
+            }
+            else{
+                recyclerViewAdapter.userList = it.data.toMutableList()
+                recyclerViewAdapter.notifyDataSetChanged()
             }
         })
+        viewModel.getUserList()
+    }
+
+    override fun onItemEditClick(user: User) {
+        val intent = Intent(this@RetrofitGet,RetrofitCreateUser::class.java)
+        intent.putExtra("user_id",user.id)
+        startActivityForResult(intent,1000)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode==1000){
+            viewModel.getUserList()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
